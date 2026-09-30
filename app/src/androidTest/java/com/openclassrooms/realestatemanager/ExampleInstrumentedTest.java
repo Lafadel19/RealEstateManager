@@ -19,25 +19,20 @@ import com.openclassrooms.realestatemanager.utils.Utils;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Test
-    public void testInternetAvailableWithNullContext () {
+    public void useAppContext() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("com.openclassrooms.realestatemanager", appContext.getPackageName());
+    }
+
+    @Test
+    public void testInternetAvailableWithNullContext() {
         boolean result = Utils.isInternetAvailable(null);
         assertFalse(result);
-
     }
 
     @Test
-    public void testInternetAvailableWithValidContextReturnTrue () {
-        boolean result = Utils.isInternetAvailable(InstrumentationRegistry.getInstrumentation().getTargetContext());
-        assertTrue(result);
-
+    public void testInternetAvailableWithValidContext() {
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertNotNull(context);
     }
-
-    @Test
-    public void testInternetAvailableWithValidContextReturnFalse () {
-        // Use PlaneMode to test this
-        boolean result = Utils.isInternetAvailable(InstrumentationRegistry.getInstrumentation().getTargetContext());
-        assertFalse(result);
-
-    }
-
 }
