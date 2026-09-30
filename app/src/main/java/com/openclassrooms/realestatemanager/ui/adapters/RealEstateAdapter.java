@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.openclassrooms.realestatemanager.data.models.RealEstate;
+import com.openclassrooms.realestatemanager.utils.SettingsManager;
 import com.openclassrooms.realestatemanager.utils.Utils;
 import com.openclassrooms.realestatemanager.R;
 import java.util.List;
@@ -78,8 +79,14 @@ public class RealEstateAdapter extends RecyclerView.Adapter<RealEstateAdapter.Re
             this.currentRealEstate = realEstate;
             type.setText(realEstate.getType());
             neighborhood.setText(realEstate.getCity());
-            int priceInEuro = Utils.convertDollarToEuro(realEstate.getPrice());
-            price.setText(String.format(Locale.getDefault(), "%,d €", priceInEuro));
+
+            String currency = SettingsManager.getCurrency(price.getContext());
+            if ("EUR".equals(currency)) {
+                int priceInEuro = Utils.convertDollarToEuro(realEstate.getPrice());
+                price.setText(String.format(Locale.getDefault(), "%,d €", priceInEuro));
+            } else {
+                price.setText(String.format(Locale.getDefault(), "$%,d", realEstate.getPrice()));
+            }
 
             if (!realEstate.getPhotos().isEmpty()) {
                 String photo = realEstate.getPhotos().get(0);

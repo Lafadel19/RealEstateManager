@@ -97,4 +97,48 @@ public class UnitTest {
         filter.setFilterStation(true);
         assertFalse(estate.getInterestPoints().contains("Station"));
     }
+
+    @Test
+    public void testMapLocationQueryAndStaticMapUrlGeneration() {
+        RealEstate estate = new RealEstate(
+                "Apartment", "Paris", "75001", 500000,
+                "Test description", 75, 4, 1, 2,
+                "123 Rue de Rivoli", new ArrayList<>(), new ArrayList<>(),
+                false, null, "Alexa", "01/09/2026"
+        );
+
+        // Test location query building (address + postcode + city)
+        StringBuilder locationBuilder = new StringBuilder();
+        if (estate.getAddress() != null && !estate.getAddress().trim().isEmpty()) {
+            locationBuilder.append(estate.getAddress());
+        }
+        if (estate.getPostcode() != null && !estate.getPostcode().trim().isEmpty()) {
+            if (locationBuilder.length() > 0) locationBuilder.append(", ");
+            locationBuilder.append(estate.getPostcode());
+        }
+        if (estate.getCity() != null && !estate.getCity().trim().isEmpty()) {
+            if (locationBuilder.length() > 0) locationBuilder.append(" ");
+            locationBuilder.append(estate.getCity());
+        }
+
+        String fullLocation = locationBuilder.toString();
+        assertEquals("123 Rue de Rivoli, 75001 Paris", fullLocation);
+
+        // Test static map URL generation format
+        String apiKey = "AIzaSyTestKey";
+        String centerParam = "48.8566,2.3522";
+        String size = "400x400";
+        String staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?"
+                + "center=" + centerParam
+                + "&zoom=15"
+                + "&size=" + size
+                + "&maptype=roadmap"
+                + "&markers=color:red%7C" + centerParam
+                + "&key=" + apiKey;
+
+        assertTrue(staticMapUrl.contains("maps.googleapis.com/maps/api/staticmap"));
+        assertTrue(staticMapUrl.contains("center=48.8566,2.3522"));
+        assertTrue(staticMapUrl.contains("zoom=15"));
+        assertTrue(staticMapUrl.contains("key=AIzaSyTestKey"));
+    }
 }

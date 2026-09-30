@@ -19,6 +19,7 @@ import com.openclassrooms.realestatemanager.viewmodels.ViewModelFactory;
 import com.openclassrooms.realestatemanager.ui.fragments.RealEstateDetailFragment;
 import com.openclassrooms.realestatemanager.ui.fragments.LoanCalculatorBottomSheet;
 import com.openclassrooms.realestatemanager.ui.fragments.SearchFilterBottomSheet;
+import com.openclassrooms.realestatemanager.ui.fragments.SettingsBottomSheet;
 import com.openclassrooms.realestatemanager.data.models.RealEstate;
 import com.openclassrooms.realestatemanager.ui.adapters.RealEstateAdapter;
 import com.openclassrooms.realestatemanager.R;
@@ -51,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void observeRealEstates() {
         viewModel.getRealEstates().observe(this, realEstates -> {
-            if (realEstates == null || realEstates.isEmpty()) {
-                viewModel.onRealEstatesEmpty();
-            } else {
+            if (realEstates != null) {
                 adapter.setRealEstates(realEstates);
             }
         });
@@ -119,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
             SearchFilterBottomSheet.newInstance(viewModel.getCurrentFilter(), filter -> {
                 viewModel.setFilter(filter);
             }).show(getSupportFragmentManager(), "SearchFilterBottomSheet");
+            return true;
+        }
+        if (item.getItemId() == R.id.action_settings) {
+            SettingsBottomSheet.newInstance(() -> {
+                adapter.notifyDataSetChanged();
+            }).show(getSupportFragmentManager(), "SettingsBottomSheet");
             return true;
         }
         if (item.getItemId() == R.id.add) {

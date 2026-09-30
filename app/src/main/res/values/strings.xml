@@ -9,6 +9,7 @@
     <string name="menu_edit">Edit</string>
     <string name="menu_loan_calculator">Loan Calculator</string>
     <string name="menu_map">Map</string>
+    <string name="menu_settings">Settings</string>
     <string name="hint_type">Type (e.g. Apartment, House)</string>
     <string name="hint_city">City</string>
     <string name="hint_postcode">Postal Code</string>
