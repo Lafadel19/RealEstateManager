@@ -2,11 +2,13 @@
     <string name="app_name">Real Estate Manager</string>
     <string name="title_add_real_estate">Add Real Estate</string>
     <string name="title_edit_real_estate">Edit Real Estate</string>
+    <string name="title_properties_map">Properties Map</string>
     <string name="menu_back">Back</string>
     <string name="menu_search">Search</string>
     <string name="menu_add">Add</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_loan_calculator">Loan Calculator</string>
+    <string name="menu_map">Map</string>
     <string name="hint_type">Type (e.g. Apartment, House)</string>
     <string name="hint_city">City</string>
     <string name="hint_postcode">Postal Code</string>

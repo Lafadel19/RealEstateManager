@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
+import com.openclassrooms.realestatemanager.utils.Utils;
+
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -17,5 +19,25 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Test
-    public void 
+    public void testInternetAvailableWithNullContext () {
+        boolean result = Utils.isInternetAvailable(null);
+        assertFalse(result);
+
+    }
+
+    @Test
+    public void testInternetAvailableWithValidContextReturnTrue () {
+        boolean result = Utils.isInternetAvailable(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        assertTrue(result);
+
+    }
+
+    @Test
+    public void testInternetAvailableWithValidContextReturnFalse () {
+        // Use PlaneMode to test this
+        boolean result = Utils.isInternetAvailable(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        assertFalse(result);
+
+    }
+
 }

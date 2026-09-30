@@ -49,7 +49,7 @@ public class Utils {
      * @param context
      * @return
      */
-    public static Boolean isInternetAvailable(Context context){
+    public static boolean isInternetAvailable(Context context){
        // WifiManager wifi = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         // return wifi.isWifiEnabled();
         if (context == null) return false;

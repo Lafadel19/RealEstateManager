@@ -110,6 +110,11 @@ public class MainActivity extends AppCompatActivity {
             LoanCalculatorBottomSheet.newInstance().show(getSupportFragmentManager(), "LoanCalculatorBottomSheet");
             return true;
         }
+        if (item.getItemId() == R.id.action_map) {
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+            return true;
+        }
         if (item.getItemId() == R.id.action_search) {
             SearchFilterBottomSheet.newInstance(viewModel.getCurrentFilter(), filter -> {
                 viewModel.setFilter(filter);
